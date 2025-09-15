@@ -1,0 +1,52 @@
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: #ffffff; /* clean white background */
+  overflow-x: hidden;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Gradient background helper */
+.gradient-bg {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf5 100%);
+}
+
+/* Blob decoration */
+.blob {
+  position: absolute;         /* Add this line */
+  top: 0;                     /* Adjust as needed */
+  left: 0;                    /* Adjust as needed */
+  z-index: 0;                 /* Ensure blob is behind content */
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  animation: blobMove 25s infinite alternate ease-in-out;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes blobMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
