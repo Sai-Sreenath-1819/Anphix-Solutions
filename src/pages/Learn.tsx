@@ -75,7 +75,7 @@ export default function Learn(): React.JSX.Element {
           </Typography>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} rowSpacing={10}>
           {LEARN_CONTENT.sections.map((section, index) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
               <Card

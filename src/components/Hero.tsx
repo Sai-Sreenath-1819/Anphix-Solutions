@@ -82,10 +82,11 @@ export default function Hero(): JSX.Element {
           <Grid size={{ xs: 12, md: 9 }}>
             <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
               <Typography
-                variant="h2"
+                variant="h3"
                 fontWeight="bold"
                 gutterBottom
                 sx={{
+                  mt: { xs: 8, md: 2 }, // ✅ adds more space on mobile, less on desktop
                   textShadow: HERO_STYLES.textShadow,
                   color: "primary.main",
                 }}
@@ -104,7 +105,13 @@ export default function Hero(): JSX.Element {
                 {HERO_CONTENT.subtitle}
               </Typography>
 
-              <Box sx={{ display: "flex", gap: 2, justifyContent: { xs: "center", md: "flex-start" } }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: { xs: "center", md: "flex-start" },
+                }}
+              >
                 <Link to="services" smooth duration={600} offset={-70}>
                   <Button variant="contained" color="secondary" size="large">
                     {HERO_CONTENT.primaryCta}
@@ -122,7 +129,11 @@ export default function Hero(): JSX.Element {
           {/* Right side animation */}
           <Grid
             size={{ xs: 7, md: 3 }}
-            sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Lottie
               animationData={heroAnimation}

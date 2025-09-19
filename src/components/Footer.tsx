@@ -128,7 +128,7 @@ export default function Footer() {
             >
               Services
             </Typography>
-            {SERVICES_CONTENT.items.slice(0, 4).map((service) => (
+            {SERVICES_CONTENT.items.map((service) => (
               <Typography
                 key={service.title}
                 variant="body2"

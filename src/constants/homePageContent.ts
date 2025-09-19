@@ -10,7 +10,7 @@ import ComputerIcon from '@mui/icons-material/Computer';
 export const HERO_CONTENT = {
   title: "Scaling Businesses with Future-Ready Talent",
   subtitle:
-    "At Anphix Solutions, we specialize in connecting businesses with future-ready talent that drives real growth. By delivering the right people at the right time, we ensure your organization has the skills and expertise it needs to scale faster, stay competitive, and achieve long-term success. Whether you are expanding into new markets, building stronger teams, or accelerating projects, our tailored staffing and recruitment solutions are designed to fuel your business expansion seamlessly.",
+    "At Anphix Solutions, we specialize in connecting businesses with future-ready talent that drives real growth. By delivering the right people at the right time, we ensure your organization has the skills and expertise it needs to scale faster, stay competitive, and achieve long-term success.",
   primaryCta: "Explore Services",
   secondaryCta: "Contact Us",
 };

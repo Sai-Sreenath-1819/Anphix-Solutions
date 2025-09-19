@@ -1,54 +1,22 @@
-// import { useState } from "react";
 import {
   Box,
-//   Button,
+  Button,
   Container,
   Grid,
-//   TextField,
+  TextField,
   Typography,
   IconButton,
   Paper,
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
-// import EmailJS from "emailjs-com";
 import { COMPANY_INFO } from "../constants/companyInfo";
 import { ICON_MAP, SOCIAL_LINKS } from "../constants/socialLinks";
-// import { EMAIL_INFO } from "../constants/emailInfo";
 
 export default function Contact() {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     message: "",
-//   });
-//   const [status, setStatus] = useState("");
-
-//   const handleChange = (
-//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-//   ) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setStatus("Sending...");
-
-//     EmailJS.send(
-//       EMAIL_INFO.serviceId,
-//       EMAIL_INFO.templateId,
-//       formData,
-//       EMAIL_INFO.publicKey
-//     )
-//       .then(() => {
-//         setStatus("✅ Message sent successfully!");
-//         setFormData({ name: "", email: "", message: "" });
-//       })
-//       .catch(() => setStatus("❌ Failed to send. Try again."));
-//   };
-
   return (
     <Box id="contact" sx={{ py: 10, bgcolor: "grey.100" }}>
       <Container maxWidth="lg">
+        {/* Section Title */}
         <Typography variant="h3" fontWeight="bold" align="center" gutterBottom>
           Contact Us
         </Typography>
@@ -83,7 +51,7 @@ export default function Contact() {
               {/* Social Links */}
               <Box sx={{ mt: 3 }}>
                 {SOCIAL_LINKS.map((link) => {
-                  const Icon = ICON_MAP[link.icon]; // ✅ Icon is a component type
+                  const Icon = ICON_MAP[link.icon];
                   return (
                     <IconButton
                       key={link.label}
@@ -100,8 +68,8 @@ export default function Contact() {
             </Paper>
           </Grid>
 
-          {/* Right - Contact Form */}
-          {/* <Grid size={{ xs: 12, md: 7 }}>
+          {/* Right - Netlify Contact Form */}
+          <Grid size={{ xs: 12, md: 7 }}>
             <Paper
               elevation={3}
               sx={{ p: 4, borderRadius: 3, bgcolor: "white" }}
@@ -109,13 +77,22 @@ export default function Contact() {
               <Typography variant="h6" gutterBottom>
                 Send us a message
               </Typography>
-              <Box component="form" onSubmit={handleSubmit}>
+
+              {/* ✅ Netlify Form */}
+              <Box
+                component="form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                sx={{ mt: 2 }}
+              >
+                {/* Hidden input required by Netlify */}
+                <input type="hidden" name="form-name" value="contact" />
+
                 <TextField
                   fullWidth
                   label="Name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   margin="normal"
                   required
                 />
@@ -124,8 +101,6 @@ export default function Contact() {
                   label="Email"
                   name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   margin="normal"
                   required
                 />
@@ -135,8 +110,6 @@ export default function Contact() {
                   name="message"
                   multiline
                   rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
                   margin="normal"
                   required
                 />
@@ -150,16 +123,8 @@ export default function Contact() {
                   Send Message
                 </Button>
               </Box>
-
-              {status && (
-                <Typography
-                  sx={{ mt: 2, color: status.includes("✅") ? "green" : "red" }}
-                >
-                  {status}
-                </Typography>
-              )}
             </Paper>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Container>
     </Box>
