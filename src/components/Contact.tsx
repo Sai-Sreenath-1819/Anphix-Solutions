@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -13,10 +14,47 @@ import { COMPANY_INFO } from "../constants/companyInfo";
 import { ICON_MAP, SOCIAL_LINKS } from "../constants/socialLinks";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("Sending...");
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...formData,
+        }).toString(),
+      });
+
+      if (response.ok) {
+        setStatus("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // clear fields
+      } else {
+        setStatus("❌ Failed to send. Please try again.");
+      }
+    } catch  {
+      setStatus("❌ Something went wrong. Try again later.");
+    }
+  };
+
   return (
     <Box id="contact" sx={{ py: 10, bgcolor: "grey.100" }}>
       <Container maxWidth="lg">
-        {/* Section Title */}
         <Typography variant="h3" fontWeight="bold" align="center" gutterBottom>
           Contact Us
         </Typography>
@@ -68,7 +106,7 @@ export default function Contact() {
             </Paper>
           </Grid>
 
-          {/* Right - Netlify Contact Form */}
+          {/* Right - Contact Form */}
           <Grid size={{ xs: 12, md: 7 }}>
             <Paper
               elevation={3}
@@ -78,21 +116,25 @@ export default function Contact() {
                 Send us a message
               </Typography>
 
-              {/* ✅ Netlify Form */}
+              {/* ✅ Netlify form */}
               <Box
                 component="form"
+                onSubmit={handleSubmit}
                 name="contact"
                 method="POST"
                 data-netlify="true"
-                sx={{ mt: 2 }}
+                data-netlify-honeypot="bot-field"
               >
-                {/* Hidden input required by Netlify */}
+                {/* Hidden inputs for Netlify */}
                 <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
 
                 <TextField
                   fullWidth
                   label="Name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   margin="normal"
                   required
                 />
@@ -101,6 +143,8 @@ export default function Contact() {
                   label="Email"
                   name="email"
                   type="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   margin="normal"
                   required
                 />
@@ -110,9 +154,12 @@ export default function Contact() {
                   name="message"
                   multiline
                   rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
                   margin="normal"
                   required
                 />
+
                 <Button
                   type="submit"
                   variant="contained"
@@ -123,6 +170,19 @@ export default function Contact() {
                   Send Message
                 </Button>
               </Box>
+
+              {/* Status message */}
+              {status && (
+                <Typography
+                  sx={{
+                    mt: 2,
+                    color: status.includes("✅") ? "green" : "red",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {status}
+                </Typography>
+              )}
             </Paper>
           </Grid>
         </Grid>
